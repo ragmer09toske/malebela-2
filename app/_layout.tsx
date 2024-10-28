@@ -11,6 +11,7 @@ import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+import { createTamagui } from 'tamagui';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,11 +30,13 @@ export default function RootLayout() {
   }
 
   return (
-    <GluestackUIProvider mode="light"><ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <GluestackUIProvider mode="light">
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-      </ThemeProvider></GluestackUIProvider>
+      </ThemeProvider>
+    </GluestackUIProvider>
   );
 }

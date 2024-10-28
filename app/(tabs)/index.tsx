@@ -3,14 +3,18 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import {View, TextField, Text, Button} from 'react-native-ui-lib';
+import { Card, TextInput } from 'react-native-paper';
+import { Avatar } from 'react-native-paper';
+import { Center } from '@/components/ui/center';
 
 export default function HomeScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [showPassword, setShowPassword] = React.useState(false)
+  const [showSignUp, setShowSignUp] = useState(false);
   const handleState = () => {
     setShowPassword((showState) => {
       return !showState
@@ -22,9 +26,12 @@ export default function HomeScreen() {
   }, []);
 
   const openBottomSheet = () => {
-    bottomSheetRef.current?.snapToIndex(1); // Open to the 50% snap point (index 1)
+    bottomSheetRef.current?.snapToIndex(1); // Open to the 20% snap point (index 1)
   };
-
+  const openBottomSheetSignUp = () => {
+    bottomSheetRef.current?.snapToIndex(3); 
+    setShowSignUp(true)
+  };
   return (
     <GestureHandlerRootView style={styles.rootContainer}>
       <View style={styles.container}>
@@ -37,11 +44,7 @@ export default function HomeScreen() {
             />
           }
         >
-          <ThemedView style={styles.titleContainer}>
-            <ThemedText type="title">Welcome!</ThemedText>
-            <HelloWave />
-          </ThemedView>
-
+          <Text blue30 text20>Welcome</Text>
           <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Step 1: Try it</ThemedText>
             <ThemedText>
@@ -71,29 +74,63 @@ export default function HomeScreen() {
               <ThemedText type="defaultSemiBold">app-example</ThemedText>.
             </ThemedText>
           </ThemedView>
-          <Button  onPress={openBottomSheet}>
-            <Text>Continue</Text>
+          <Button  onPress={openBottomSheet} style={{paddingVertical: 15 }}>
+            <Text style={{color:'white'}}>Continue</Text>
           </Button>
         </ParallaxScrollView>
 
         {/* BottomSheet component */}
         <BottomSheet
           ref={bottomSheetRef}
-          snapPoints={['25%', '50%', '90%']}  // Define snap points
+          snapPoints={['25%', '50%','75%', '90%']}  
           onChange={handleSheetChanges}
           enablePanDownToClose={true}  // Optional: allows closing by swiping down
         >
-          <BottomSheetView >
-            <View style={styles.contentContainer}>
-              <Text blue50 text20>Welcome</Text>
-              <View flex paddingH-25 paddingT-120>
-                <TextField text100 placeholder="username" grey10/>
-                <TextField text10 placeholder="password" secureTextEntry grey10/>
-                <View marginT-100 center>
+          <BottomSheetView>
+            <View >
+              {!showSignUp ? 
+              (<View>
+                <View center>
                   <Button text70 white background-orange30 label="Login"/>
-                  <Button link text70 orange30 label="Sign Up" marginT-20/>
+                  <Button link text70 orange30 label="Sign Up" onPress={openBottomSheetSignUp} marginT-20/>
                 </View>
-              </View>
+              </View> )
+              :
+              (
+                <View style={styles.contentContainer}>
+                  <View center>
+                    <Text blue30 text50>Sign Up</Text>
+                  </View>
+                  <View>
+                    <Text>
+                      Full Names
+                    </Text>
+                    <TextInput
+                      label="names"
+                      mode='outlined'
+                    />
+                  </View>
+                  <View>
+                    <Text>
+                      Email
+                    </Text>
+                    <TextInput
+                      label="Email"
+                      mode='outlined'
+                    />
+                  </View>
+                  <View>
+                    <Text>
+                      Phone
+                    </Text>
+                    <TextInput
+                      label="phone"
+                      mode='outlined'
+                    />
+                  </View>
+                </View>
+              )
+            }
             </View>
           </BottomSheetView>
         </BottomSheet>
@@ -127,9 +164,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   contentContainer: {
-    flex: 1,
-    padding: 36,
-    alignItems: 'center',
+    width: "100%",
+    padding: 35,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 20
   },
   bottomSheetContainer: {
     paddingHorizontal: 35,

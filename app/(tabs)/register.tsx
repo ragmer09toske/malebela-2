@@ -18,7 +18,10 @@ export default function HomeScreen() {
   }, []);
 
   const openBottomSheet = () => {
-    bottomSheetRef.current?.snapToIndex(1); // Open to the 50% snap point (index 1)
+    bottomSheetRef.current?.snapToIndex(1); // Open to the 20% snap point (index 1)
+  };
+  const openBottomSheetSignUp = () => {
+    bottomSheetRef.current?.snapToIndex(3); 
   };
 
   return (
@@ -68,14 +71,14 @@ export default function HomeScreen() {
             </ThemedText>
           </ThemedView>
           <Button mode="contained" onPress={openBottomSheet}>
-            Continue
+            <Text style={{color: 'white'}}>Continue</Text>
           </Button>
         </ParallaxScrollView>
 
         {/* BottomSheet component */}
         <BottomSheet
           ref={bottomSheetRef}
-          snapPoints={['25%', '50%', '90%']}  // Define snap points
+          snapPoints={['25%', '50%', '90%']}
           onChange={handleSheetChanges}
           enablePanDownToClose={true}  // Optional: allows closing by swiping down
         >
