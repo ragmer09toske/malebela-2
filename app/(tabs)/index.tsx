@@ -4,13 +4,9 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import React, { useCallback, useRef } from 'react';
-import { View, Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { Button } from 'react-native-paper';
-import { Center } from '@/components/ui/center';
-import { Progress, ProgressFilledTrack } from '@/components/ui/progress';
-import { VStack } from '@/components/ui/vstack';
+import {View, TextField, Text, Button} from 'react-native-ui-lib';
 
 export default function HomeScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -75,8 +71,8 @@ export default function HomeScreen() {
               <ThemedText type="defaultSemiBold">app-example</ThemedText>.
             </ThemedText>
           </ThemedView>
-          <Button mode="contained" onPress={openBottomSheet}>
-            Continue
+          <Button  onPress={openBottomSheet}>
+            <Text>Continue</Text>
           </Button>
         </ParallaxScrollView>
 
@@ -89,11 +85,16 @@ export default function HomeScreen() {
         >
           <BottomSheetView >
             <View style={styles.contentContainer}>
-              <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Explore</ThemedText>
-              </ThemedView>
+              <Text blue50 text20>Welcome</Text>
+              <View flex paddingH-25 paddingT-120>
+                <TextField text100 placeholder="username" grey10/>
+                <TextField text10 placeholder="password" secureTextEntry grey10/>
+                <View marginT-100 center>
+                  <Button text70 white background-orange30 label="Login"/>
+                  <Button link text70 orange30 label="Sign Up" marginT-20/>
+                </View>
+              </View>
             </View>
-            
           </BottomSheetView>
         </BottomSheet>
       </View>
