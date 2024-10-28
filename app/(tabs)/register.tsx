@@ -8,18 +8,10 @@ import { View, Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Button } from 'react-native-paper';
-import { Center } from '@/components/ui/center';
-import { Progress, ProgressFilledTrack } from '@/components/ui/progress';
-import { VStack } from '@/components/ui/vstack';
 
 export default function HomeScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const [showPassword, setShowPassword] = React.useState(false)
-  const handleState = () => {
-    setShowPassword((showState) => {
-      return !showState
-    })
-  }
+
   // Callback to handle sheet changes
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
@@ -87,13 +79,8 @@ export default function HomeScreen() {
           onChange={handleSheetChanges}
           enablePanDownToClose={true}  // Optional: allows closing by swiping down
         >
-          <BottomSheetView >
-            <View style={styles.contentContainer}>
-              <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Explore</ThemedText>
-              </ThemedView>
-            </View>
-            
+          <BottomSheetView style={styles.contentContainer}>
+            <Text>Awesome</Text>
           </BottomSheetView>
         </BottomSheet>
       </View>
@@ -130,11 +117,5 @@ const styles = StyleSheet.create({
     padding: 36,
     alignItems: 'center',
   },
-  bottomSheetContainer: {
-    paddingHorizontal: 35,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10
-  }
 });
 
