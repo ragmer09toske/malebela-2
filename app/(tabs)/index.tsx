@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Platform } from 'react-native';
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -8,8 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import {View, TextField, Text, Button} from 'react-native-ui-lib';
 import { Card, TextInput } from 'react-native-paper';
-import { Avatar } from 'react-native-paper';
-import { Center } from '@/components/ui/center';
+
 
 export default function HomeScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -128,6 +126,10 @@ export default function HomeScreen() {
                       mode='outlined'
                     />
                   </View>
+                  <Button  onPress={openBottomSheet} style={{paddingVertical: 15 }}>
+                    <Text style={{color:'white'}}>SignUp</Text>
+                    <Text style={{color:'white'}}>SignUp</Text>
+                  </Button>
                 </View>
               )
             }
