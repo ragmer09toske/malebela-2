@@ -128,7 +128,6 @@ export default function HomeScreen() {
                   </View>
                   <Button  onPress={openBottomSheet} style={{paddingVertical: 15 }}>
                     <Text style={{color:'white'}}>SignUp</Text>
-                    <Text style={{color:'white'}}>SignUp</Text>
                   </Button>
                 </View>
               )
